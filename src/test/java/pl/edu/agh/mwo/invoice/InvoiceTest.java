@@ -22,6 +22,40 @@ public class InvoiceTest {
 	}
 
 	@Test
+	public void testNumberAvalibleOnPrint() {
+		String printed = invoice.preparePrint();
+		String number = String.valueOf(invoice.getNumber());
+		Assert.assertThat(printed, Matchers.containsString(number));
+	}
+
+	@Test
+	public void testTheSecondInvoiceHasGreaterNumber() {
+		int numberFirst = invoice.getNumber();
+		int numberSecond = new Invoice().getNumber();
+		Assert.assertThat(numberFirst, Matchers.lessThan(numberSecond));
+
+	}
+
+	@Test
+	public void testTheSameInvoiceTheSameNumber() {
+		Assert.assertEquals(invoice.getNumber(), invoice.getNumber());
+	}
+
+	@Test
+	public void testInvoiceHasDifferentNumbers() {
+		int number1 = invoice.getNumber();
+		int number2 = new Invoice().getNumber();
+		int number = invoice.getNumber();
+		Assert.assertNotEquals(number1, number2);
+	}
+
+	@Test
+	public void testInvoiceHasNumber() {
+		int number = invoice.getNumber();
+		Assert.assertThat(number, Matchers.greaterThan(0));
+	}
+
+	@Test
 	public void testEmptyInvoiceHasEmptySubtotal() {
 		Assert.assertThat(BigDecimal.ZERO, Matchers.comparesEqualTo(invoice.getNetTotal()));
 	}
@@ -104,4 +138,5 @@ public class InvoiceTest {
 	public void testInvoiceWithNegativeQuantity() {
 		invoice.addProduct(new DairyProduct("Zsiadle mleko", new BigDecimal("5.55")), -1);
 	}
+
 }
