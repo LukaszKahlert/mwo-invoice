@@ -54,9 +54,14 @@ public class Invoice {
 		return number;
 	}
 
-	public String preparePrint() {
-		return String.valueOf(number);
-		
+public String preparePrint() {
+//		String printed = String.valueOf(number);
+//	
+//		printed += products.keySet().stream().map(product ->String.format("\n%s %d %s, args))
+//		return String.valueOf(number);
+//		
+//	
+	return "a";
 	}
 
 }
